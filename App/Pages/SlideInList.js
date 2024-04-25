@@ -1,14 +1,15 @@
 import React, { useEffect, useRef } from 'react';
-import { View, Text, FlatList, Animated } from 'react-native';
+import { View, Text, FlatList, Animated, StyleSheet } from 'react-native';
 
-const SlideInList = ({ data }) => {
+const SlideInList = ({ }) => {
+  const data = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
   const animValues = useRef(data.map(() => new Animated.Value(-100))).current; // Initial position off the screen
 
   useEffect(() => {
     const animations = data.map((_, index) =>
       Animated.timing(animValues[index], {
         toValue: 0,
-        duration: 500,
+        duration: 1500,
         delay: index * 100, // Apply a slight delay for each item
         useNativeDriver: true,
       })
@@ -28,24 +29,43 @@ const SlideInList = ({ data }) => {
         }),
       }}
     >
-      <Text>{item}</Text>
+      <Text style={styles.text}>{item}</Text>
     </Animated.View>
   );
 
   return (
-    <View>
+    <View style={styles.container}>
       <FlatList
         data={data}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
+        contentContainerStyle={styles.contentContainer} // Apply contentContainerStyle to center the items
       />
     </View>
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center', 
+  },
+
+  contentContainer: {
+    flex: 1,
+    alignItems: 'center', // Center items horizontally
+    justifyContent: 'center',
+  },
+
+  text: {
+    fontWeight: 'bold', // Make the text bold
+    fontSize: 20, // Increase font size
+  },
+});
+
 SlideInList.navigationOptions = {
-    title: 'Slide-In', // Specify the header title here
-  };
-  
+  title: 'Slide-In', // Specify the header title here
+};
 
 export default SlideInList;

@@ -9,12 +9,12 @@ const RotationButton = () => {
       rotationValue,
       {
         toValue: 1,
-        duration: 1000, // Animation duration
+        duration: 1000,
         easing: Easing.linear,
         useNativeDriver: true,
       }
     ).start(() => {
-      rotationValue.setValue(0); // Reset the animation value
+      rotationValue.setValue(0);
     });
   };
 
@@ -30,25 +30,29 @@ const RotationButton = () => {
   return (
     <TouchableOpacity onPress={rotateButton} style={styles.buttonContainer}>
       <Animated.View style={[styles.button, animatedStyles]}>
-        <Text style={styles.buttonText}>Press Me</Text>
+        <Text style={styles.buttonText}>Rotate Me</Text>
       </Animated.View>
     </TouchableOpacity>
   );
 };
 
 RotationButton.navigationOptions = {
-  title: 'Rotation Button', // Specify the header title here
+  title: 'Rotation Button',
 };
-
 
 const styles = StyleSheet.create({
   buttonContainer: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
   },
   button: {
-    backgroundColor: 'blue',
-    padding: 20,
-    borderRadius: 10,
+    backgroundColor: '#53C3DA', // Green background color
+    padding: 30,
+    borderRadius: 50, // Make it circular
+    borderWidth: 2, // Add border
+    borderColor: '#3A737F', // Border color
+    elevation: 5, // Add shadow on Android
   },
   buttonText: {
     color: 'white',
