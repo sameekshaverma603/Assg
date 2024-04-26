@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Animated, Button} from 'react-native';
+import { View, StyleSheet, Animated, ImageBackground } from 'react-native';
 
 class FadeIn extends Component {
   state = {
@@ -9,7 +9,7 @@ class FadeIn extends Component {
   onLoad = () => {
     Animated.timing(this.state.opacity, {
       toValue: 1,
-      duration: 1000,
+      duration: 1500,
       useNativeDriver: true,
     }).start();
   }
@@ -39,16 +39,19 @@ class FadeIn extends Component {
 }
 
 FadeIn.navigationOptions = {
-    title: 'Fade-In', // Specify the header title here
-  };
-  
+  title: 'Fade-In', // Specify the header title here
+};
+
 const App = () => (
-  <View style={styles.container}>
+  <ImageBackground
+    source={require('../Assets/images/bgimg4.png')} // Replace 'background.jpg' with your actual background image
+    style={styles.container}
+  >
     <FadeIn
       style={styles.image}
-      source={require('../Assets/images/img1.jpg') }
+      source={require('../Assets/images/img1.jpg')}
     />
-  </View>
+  </ImageBackground>
 );
 
 const styles = StyleSheet.create({

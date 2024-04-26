@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { TouchableOpacity, Animated, Easing, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, Animated, Easing, Text, StyleSheet, ImageBackground } from 'react-native';
 
 const RotationButton = () => {
   const rotationValue = useRef(new Animated.Value(0)).current;
@@ -28,11 +28,16 @@ const RotationButton = () => {
   };
 
   return (
-    <TouchableOpacity onPress={rotateButton} style={styles.buttonContainer}>
-      <Animated.View style={[styles.button, animatedStyles]}>
-        <Text style={styles.buttonText}>Rotate Me</Text>
-      </Animated.View>
-    </TouchableOpacity>
+    <ImageBackground
+      source={require('../Assets/images/bgimg3.png')} // Replace 'background.jpg' with the actual file path of your background image
+      style={styles.background}
+    >
+      <TouchableOpacity onPress={rotateButton} style={styles.buttonContainer}>
+        <Animated.View style={[styles.button, animatedStyles]}>
+          <Text style={styles.buttonText}>Rotate Me</Text>
+        </Animated.View>
+      </TouchableOpacity>
+    </ImageBackground>
   );
 };
 
@@ -41,6 +46,11 @@ RotationButton.navigationOptions = {
 };
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    resizeMode: 'cover', // or 'stretch' or 'contain'
+    justifyContent: 'center',
+  },
   buttonContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -51,7 +61,7 @@ const styles = StyleSheet.create({
     padding: 30,
     borderRadius: 50, // Make it circular
     borderWidth: 2, // Add border
-    borderColor: '#3A737F', // Border color
+    borderColor: '#4BA7BA', // Border color
     elevation: 5, // Add shadow on Android
   },
   buttonText: {

@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { View, Text, FlatList, Animated, StyleSheet } from 'react-native';
+import { View, Text, FlatList, Animated, StyleSheet, ImageBackground } from 'react-native';
 
 const SlideInList = ({ }) => {
-  const data = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
+  const data = ['Create Post', 'Like post', 'Comment on Post', 'Share Post', 'Follow User'];
   const animValues = useRef(data.map(() => new Animated.Value(-100))).current; // Initial position off the screen
 
   useEffect(() => {
@@ -34,38 +34,47 @@ const SlideInList = ({ }) => {
   );
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={data}
-        renderItem={renderItem}
-        keyExtractor={(item, index) => index.toString()}
-        contentContainerStyle={styles.contentContainer} // Apply contentContainerStyle to center the items
-      />
-    </View>
+    <ImageBackground
+      source={require('../Assets/images/bgimg2.png')} // Replace 'background.jpg' with the actual file name of your background image
+      style={styles.background}
+    >
+      <View style={styles.container}>
+        <FlatList
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={(item, index) => index.toString()}
+          contentContainerStyle={styles.contentContainer} // Apply contentContainerStyle to center the items
+        />
+      </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    resizeMode: 'cover', // or 'stretch' or 'contain'
+    justifyContent: 'center',
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center', 
+    alignItems: 'center',
   },
-
   contentContainer: {
     flex: 1,
     alignItems: 'center', // Center items horizontally
     justifyContent: 'center',
   },
-
   text: {
-    fontWeight: 'bold', // Make the text bold
-    fontSize: 20, // Increase font size
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: 'white', // Make the text white
   },
 });
 
 SlideInList.navigationOptions = {
-  title: 'Slide-In', // Specify the header title here
+  title: 'Slide-In',
 };
 
 export default SlideInList;

@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { View, Image, Animated, StyleSheet } from 'react-native';
+import { View, Image, Animated, StyleSheet, Text } from 'react-native';
 
 const HomeScreen = () => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -9,7 +9,7 @@ const HomeScreen = () => {
       fadeAnim,
       {
         toValue: 1,
-        duration: 1000,
+        duration: 1800,
         useNativeDriver: true,
       }
     ).start();
@@ -17,10 +17,11 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Animated.Image
+      <Image
         source={require('../Assets/images/bgimg.png')} // Replace with your background image
-        style={[styles.backgroundImage, { opacity: fadeAnim }]}
+        style={styles.backgroundImage}
       />
+      <Animated.Text style={[styles.text, { opacity: fadeAnim }]}>App Animation</Animated.Text>
     </View>
   );
 };
@@ -35,6 +36,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     height: '100%',
+  },
+  text: {
+    fontSize: 30,
+    color: 'white',
+    fontWeight: 'bold',
   },
 });
 
