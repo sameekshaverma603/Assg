@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { TouchableOpacity, Animated, Easing, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, Animated, Easing, Text, StyleSheet, ImageBackground } from 'react-native';
 
 const RotationButton = () => {
   const rotationValue = useRef(new Animated.Value(0)).current;
@@ -9,12 +9,12 @@ const RotationButton = () => {
       rotationValue,
       {
         toValue: 1,
-        duration: 1000, // Animation duration
+        duration: 1000,
         easing: Easing.linear,
         useNativeDriver: true,
       }
     ).start(() => {
-      rotationValue.setValue(0); // Reset the animation value
+      rotationValue.setValue(0);
     });
   };
 
@@ -28,27 +28,41 @@ const RotationButton = () => {
   };
 
   return (
-    <TouchableOpacity onPress={rotateButton} style={styles.buttonContainer}>
-      <Animated.View style={[styles.button, animatedStyles]}>
-        <Text style={styles.buttonText}>Press Me</Text>
-      </Animated.View>
-    </TouchableOpacity>
+    <ImageBackground
+      source={require('../Assets/images/bgimg3.png')} // Replace 'background.jpg' with the actual file path of your background image
+      style={styles.background}
+    >
+      <TouchableOpacity onPress={rotateButton} style={styles.buttonContainer}>
+        <Animated.View style={[styles.button, animatedStyles]}>
+          <Text style={styles.buttonText}>Rotate Me</Text>
+        </Animated.View>
+      </TouchableOpacity>
+    </ImageBackground>
   );
 };
 
 RotationButton.navigationOptions = {
-  title: 'Rotation Button', // Specify the header title here
+  title: 'Rotation Button',
 };
 
-
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    resizeMode: 'cover', // or 'stretch' or 'contain'
+    justifyContent: 'center',
+  },
   buttonContainer: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
   },
   button: {
-    backgroundColor: 'blue',
-    padding: 20,
-    borderRadius: 10,
+    backgroundColor: '#53C3DA', // Green background color
+    padding: 30,
+    borderRadius: 50, // Make it circular
+    borderWidth: 2, // Add border
+    borderColor: '#4BA7BA', // Border color
+    elevation: 5, // Add shadow on Android
   },
   buttonText: {
     color: 'white',
